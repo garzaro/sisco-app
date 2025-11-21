@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export function SchemaValidacao() {
   const usuarioSchema = z.object({
-    nome: z.string()
+    nome_completo: z.string()
       .nonempty("Nome completo é de preenchimento obrigatório")
       .min(2, "Nome deve ter ao menos 3 caracteres")
       .refine(
@@ -14,7 +14,7 @@ export function SchemaValidacao() {
       .nonempty("CPF é de preenchimento obrigatório")
       .regex(/^\d{11}$/, "O CPF deve ter conter 11 caracteres"),
 
-    usuario: z.string()
+    nome_usuario: z.string()
       .nonempty("Nome de usuário é de preenchimento obrigatório")
       .min(3, "Nome de usuario deve ter ao menos 3 caracteres")
       .refine(
@@ -27,6 +27,10 @@ export function SchemaValidacao() {
       .email("e-mail inválido"),
 
     email_confirm: z.string().email("Confirme o e-mail"),
+
+    senha: z.string()
+      .nonempty("Senha é de preenchimento obrigatório")
+      .min(6, "A senha deve ter no mínimo 6 caracteres")
   });
   return usuarioSchema;
 }
