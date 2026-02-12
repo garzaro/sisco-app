@@ -1,10 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function MenuItem({ label, href, className='' }) {
+export default function MenuItem({ label, to, className='' }) {
   return (
     <Link
-      to={href}
+      to={to}
       className={`
       block px-4 py-2 items-center hover:bg-zinc-800
       rounded-full w-32 h-10 border-b-1 border-transparent
@@ -18,7 +18,7 @@ export default function MenuItem({ label, href, className='' }) {
 }
 
 /**
- * 🧠 3. Dica: deixe o MenuItem mais inteligente
+ * 🧠 : deixar o MenuItem mais inteligente
  *
  * Você pode simplificar o uso dele — em vez de precisar passar href manualmente, derive automaticamente o to a partir do label:
  *

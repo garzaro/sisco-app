@@ -4,20 +4,29 @@ import MenuItem from "./MenuItem.jsx";
 
 export default function Menu({className = ''}) {
   return (
-    <aside className={`py-7 px-7 bg-zinc-900 border-r " ${className}>`}>
+    <aside className={`py-7 px-7 bg-zinc-900 border-r" ${className}>`}>
       <nav className="flex flex-col gap-4">
+
         <MenuGrupo label="Escola">
           <MenuItem label="Consultar" />
-          <MenuItem label="CadastrarUsuario" />
+          <MenuItem label="Cadastrar" to="cadastrar-escola"/>
+        </MenuGrupo>
+
+        <MenuGrupo label="Diretor">
+          <MenuItem label="Consultar" />
+          <MenuItem label="Cadastrar" to="cadastrar-diretor"/>
+        </MenuGrupo>
+
+        <MenuGrupo label="Provedor">
+          <MenuItem label="Consultar" />
+          <MenuItem label="Cadastrar" to="cadastrar-provedor" />
         </MenuGrupo>
 
         <MenuGrupo label="Usuario">
-          <MenuItem label="Cadastrar" href="cadastrar-usuario" />
+          <MenuItem label="Cadastrar" to="cadastrar-usuario" />
+          <MenuItem label="Login" to="login-form" />
         </MenuGrupo>
-
-        <MenuGrupo>
-
-        </MenuGrupo>
+        
       </nav>
     </aside>
     )

@@ -9,6 +9,15 @@ const ApiServiceClient = (apiurl) => {
       const requestUrl = `${apiurl}${url}`;
       return httpClient.post(requestUrl, objeto);
     },
+    put: (url, objeto) => {
+      const requestUrl = `${apiurl}${url}`;
+      return httpClient.put(requestUrl, objeto);
+    },
+    get: (url) => {
+      const requestUrl = `${apiurl}${url}`;
+      return httpClient.get(requestUrl);
+    }
+
   }
 }
 export default ApiServiceClient;

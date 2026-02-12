@@ -1,8 +1,24 @@
-import { z } from "zod";
+import {z} from "zod";
 
-export function SchemaValidacao() {
+export function SchemaLogin() {
+  const loginSchema = z.object({
+
+    email: z.string()
+      .nonempty("e-mail é de preenchimento obrigatório")
+      .email("e-mail inválido")
+      .transform(v => v.replace(/^\s+/, "")),
+
+    password: z.string().trim()
+      .nonempty("Senha é de preenchimento obrigatório")
+      .min(6, "A senha deve ter no mínimo 6 caracteres"),
+  });
+
+  return loginSchema;
+}
+
+export function SchemaUsuario() {
   const usuarioSchema = z.object({
-    nome_completo: z.string()
+    nomeCompleto: z.string()
       .nonempty("Nome completo é de preenchimento obrigatório")
       .min(2, "Nome deve ter ao menos 3 caracteres")
       .refine(
@@ -14,7 +30,7 @@ export function SchemaValidacao() {
       .nonempty("CPF é de preenchimento obrigatório")
       .regex(/^\d{11}$/, "O CPF deve ter conter 11 caracteres"),
 
-    nome_usuario: z.string()
+    username: z.string()
       .nonempty("Nome de usuário é de preenchimento obrigatório")
       .min(3, "Nome de usuario deve ter ao menos 3 caracteres")
       .refine(
@@ -24,14 +40,27 @@ export function SchemaValidacao() {
 
     email: z.string()
       .nonempty("e-mail é de preenchimento obrigatório")
-      .email("e-mail inválido"),
+      .email("e-mail inválido")
+      .transform(v => v.replace(/^\s+/, "")),
 
-    email_confirm: z.string().email("Confirme o e-mail"),
+    email_confirm: z.string().email("Confirme o e-mail")
+      .transform(v => v.replace(/^\s+/, "")),
 
-    senha: z.string()
+    password: z.string().trim()
       .nonempty("Senha é de preenchimento obrigatório")
-      .min(6, "A senha deve ter no mínimo 6 caracteres")
-  });
+      .min(6, "A senha deve ter no mínimo 6 caracteres"),
+
+    confirm_password: z.string()
+      .nonempty("Confirme a senha")
+  })
+    .refine((data) => data.email === data.email_confirm, {
+      message: "Os emails não conferem",
+      path: ["email_confirm"],
+    })
+    .refine((data) => data.password === data.confirm_password, {
+      message: "As senhas não conferem",
+      path: ["confirm_password"], // <- onde mostrar o erro
+    });
   return usuarioSchema;
 }
 
@@ -82,3 +111,4 @@ export function SchemaValidacao() {
  *
  *
  * **/
+

@@ -32,7 +32,19 @@ src/
 │       ├── MenuItem.jsx  
 │       └── Pagina.jsx  
 └── App.jsx  
-└── main.jsx  
-
+└── main.jsx
 ---
+
+### Entidades
+
+Escola      
+     ├── nome   
+     ├── codigo  
+     ├── email  
+     ├── telefone  
+     ├── municipio  
+     └──
+
+- Escola 
+
 ### Para dar quebra de linha dar dois espaços no final da linha e dar enter
