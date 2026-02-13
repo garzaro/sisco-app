@@ -1,15 +1,12 @@
-import React from 'react'
 import {createHashRouter, RouterProvider} from "react-router-dom";
-import Pagina from "@/components/template/Pagina.jsx";
+import Header from "@/pages/home/LandingPage.jsx";
 import Home from "@/pages/home/Home.jsx";
+import LoginForm from "@/pages/login/login-form.jsx";
 import UsuarioCreate from "@/pages/Usuario/cadastrar-usuario.jsx";
 import EscolaCreate from "@/pages/escola/cadastrar-escola.jsx";
 import DiretorCreate from "@/pages/diretor/cadastro-diretor.jsx";
 import ProvedorCreate from "@/pages/provedor/cadastrar-provedor.jsx";
-import LoginForm from "@/pages/login/login-form.jsx";
 
-import '../styles/globals.css';
-import 'swiper/swiper.css';
 
 /**
  * createBrowserRouter - sem suporte a hash
@@ -18,13 +15,16 @@ import 'swiper/swiper.css';
  * Usar createHashRouter
  * **/
 
-function App() {
+export default function Rotas(){
   const router = createHashRouter([
     {
       path: "/", //rota padrao
-      element: <Pagina />, //layout padrao
+      // element: <Header />,
+      // element: <Pagina />, //layout padrao
       children: [ //rotas filhas
-        { index: true, element: <Home /> },
+
+        { index: true, element: <Header /> },
+        { path: "home", element: <Home />},
         { path: "login-form", element: <LoginForm /> },
         { path: "cadastrar-usuario", element: <UsuarioCreate /> },
         { path: "cadastrar-escola", element: <EscolaCreate /> },
@@ -37,4 +37,3 @@ function App() {
     <RouterProvider router={router}/>
   )
 }
-export default App
