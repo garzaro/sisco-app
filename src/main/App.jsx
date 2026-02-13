@@ -26,7 +26,8 @@ function App() {
       element: <Header />,
       // element: <Pagina />, //layout padrao
       children: [ //rotas filhas
-        { index: true, element: <Home /> },
+        { index: true, element: <Pagina /> },
+        { path: "home", element: <Home /> },
         { path: "login-form", element: <LoginForm /> },
         { path: "cadastrar-usuario", element: <UsuarioCreate /> },
         { path: "cadastrar-escola", element: <EscolaCreate /> },

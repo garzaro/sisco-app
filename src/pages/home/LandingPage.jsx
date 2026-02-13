@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Button} from "@/components/ui/button.jsx";
 import {Menu, X} from "lucide-react";
 // import {getLoginUrl} from "/utils/auth";
@@ -10,6 +10,7 @@ export default function Header(){
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const { user, isAuthenticated, logout } = useAuth();
   const [ isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     {label: 'Serviços', to: '/'},
@@ -62,9 +63,9 @@ export default function Header(){
             ) : (
               <Button
                 className="bg-blue-900 hover-blue-800 text-gray-200 transition-colors duration-300"
-                onClick={() => (window.location.to = getLoginUrl())}
+                onClick={() => navigate("/login-form")}
               >
-                Entrar
+                Entrarrrr
               </Button>
             )}
           </div>
@@ -111,7 +112,7 @@ export default function Header(){
                 <Button
                   className="w-full bg-gray-200 hover-gray-300 text-gray-900 mt-2"
                   onClick={() => {
-                    // window.location.to = getLoginUrl();
+                    navigate("/login-form");
                     setMobileMenuOpen(true)
                   }}
                 >
