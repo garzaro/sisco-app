@@ -30,6 +30,8 @@ export default function Contact() {
   const [error, setError] = useState();
   // const temErro = Object.keys(errors).length > 0;
 
+  // * DEIXAR AQUI POR ENQUANTO PORQUE ISSO DEPENDE DOS REQUISITOS E PRECISO
+  // AINDA DECIDIR COMO SERA FEITO O ATENDIMENTO *
   const handleSubmitContact = async ({e, data}) => {
     e.preventDefault();
     if (!data.nomeCompleto || !data.email || !data.message) {
@@ -47,7 +49,7 @@ export default function Contact() {
       alert("Mensagem enviada com sucesso para clebergarzaro74@gmail.com ", formContact.message);
       reset();
     } else{
-      alert("Ero ao enviar mensagem");
+      alert("Erro ao enviar mensagem");
     }
   };
 
