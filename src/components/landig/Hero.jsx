@@ -11,7 +11,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-zinc-900">
+    <section className="relative overflow-hidden bg-zinc-900 ">
 
       {/* Background Pattern - Subtle decorative element */}
       <div className="absolute inset-0 opacity-5">
@@ -33,22 +33,23 @@ export default function Hero() {
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 rounded-full border border-emerald-200">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               <span className="text-sm font-medium text-emerald-700">
                 Bem-vindo ao Sistema de Consulta Escolar
               </span>
             </div>
-
+            {/*<p className="text-red-500">CONTINUAR COM ESTA AREA VER MELHOR TEXTO - VER O QUE FIZ EM MANUS</p>*/}
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-6xl font-bold text-slate-300 leading-tight">
-                Torne Sua Jornada de trabalho {' '}
-                <span className="text-emerald-600">Simplificada</span>
+                Infraestrutura Escolar de {' '}
+                <span className="text-emerald-600">Excelência</span>
               </h1>
-              <p className="text-lg md:text-xl text-slate-100 leading-relaxed max-w-lg">
-                Acesse infomrações daas escolas, firewalls, provedores de internet e muito mais em um único lugar.
-                Acompanhe em tempo real desempenho do atendimento com transparência e facilidade.
-              </p>
+              {/*<p className="text-sm md:text-xl text-slate-100 leading-relaxed max-w-lg">*/}
+                Transformando a tecnologia de nossas escolas com soluções profissionais de rede, configuração de
+                sistemas e suporte técnico especializado. Acesse informações das escolas, firewalls, provedores de
+                internet e muito mais em um único lugar.
+              {/*</p>*/}
             </div>
 
             {/* CTA Buttons */}
@@ -91,8 +92,8 @@ export default function Hero() {
 
           {/* Right Visual Section */}
           <div className="relative h-full min-h-96 lg:min-h-full flex items-center justify-center">
-            {/* Decorative Background Shape */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-zinc-700 rounded-3xl opacity-50" />
+            {/* Decorative Background Shape - inset-0 */}
+            <div className="absolute  bg-linear-to-br from-slate-900 to-zinc-700 rounded-3xl opacity-50" />
 
             {/* Feature Cards - Floating Animation */}
             <div className="relative w-full max-w-md space-y-6">
@@ -112,7 +113,8 @@ export default function Hero() {
               </div>
 
               {/* Card 2 - Frequência */}
-              <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300
+               hover:-translate-y-1 border border-slate-100 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-emerald-100 rounded-lg group-hover:bg-emerald-200 transition-colors">
                     <Home className="w-6 h-6 text-emerald-600" />
@@ -125,7 +127,8 @@ export default function Hero() {
               </div>
 
               {/* Card 3 - Progresso */}
-              <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+              <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300
+              hover:-translate-y-1 border border-slate-100 animate-slide-up" style={{ animationDelay: '0.3s' }}>
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-amber-100 rounded-lg group-hover:bg-amber-200 transition-colors">
                     <TrendingUpIcon className="w-6 h-6 text-amber-600" />
@@ -133,6 +136,25 @@ export default function Hero() {
                   <div className="space-y-1">
                     <h3 className="font-semibold text-slate-900">Progresso Atendimento</h3>
                     <p className="text-sm text-slate-600">Visualize o desenvolvimento</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300
+              hover:-translate-y-1 border border-slate-100 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-emerald-100 rounded-lg group-hover:bg-emerald-200 transition-colors">
+                    <Home className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-semibold text-slate-900">Serviços Completos</h3>
+                    <p className="text-sm text-slate-600">Formatação e configuração de computadores</p>
+                    <p className="text-sm text-slate-600">Instalação de impressoras em rede e local</p>
+                    <p className="text-sm text-slate-600">Cabeamento e configuração de rede</p>
+                    <p className="text-sm text-slate-600">Cabeamento e configuração de rede</p>
+                    <h3 className="font-semibold text-slate-900">Instalação de Softwares</h3>
+                    <p className="text-sm text-slate-600">Implantação de ferramentas educacionais, 
+                      pacotes de escritório e sistemas de gestão escolar e configuração de rede</p>
                   </div>
                 </div>
               </div>
