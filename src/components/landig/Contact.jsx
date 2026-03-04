@@ -4,7 +4,7 @@ import {useState} from "react";
 import {Input} from "@/components/ui/input.jsx";
 import {Label} from "@/components/ui/label.jsx";
 import {Button} from "@/components/ui/button.jsx";
-import {zodResolver} from "@hookform/resolvers/zod";
+// import {zodResolver} from "@hookform/resolvers/zod";
 import {SchemaContact} from "@/components/zod/schemaContact.js";
 import {Textarea} from "@/components/ui/textarea.jsx";
 
@@ -28,7 +28,7 @@ export default function Contact() {
   } = methods;
 
   const [error, setError] = useState();
-  const temErro = Object.keys(errors).length > 0;
+  // const temErro = Object.keys(errors).length > 0;
 
   const handleSubmitContact = async ({e, data}) => {
     e.preventDefault();
@@ -135,6 +135,7 @@ export default function Contact() {
                     {/*NA PROXIM ASEMANA*/}
 
                     ⚠️ Por favor, preencha todos os campos obrigatórios!
+
                   </div>
                 )}
               </div>
