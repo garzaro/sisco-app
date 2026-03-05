@@ -110,10 +110,22 @@ export default function Footer (){
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
             <p>&copy; { anoAtual } Sistema de Consulta Escolar. Todos os direitos tortos. </p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-zinc-300 transition-colors">Facebook</a>
-              <a href="#" className="hover:text-zinc-300 transition-colors">LinkedIn</a>
-              <a href="#" className="hover:text-zinc-300 transition-colors">Instagram</a>
-              <a href="#" className="hover:text-zinc-300 transition-colors">Youtube</a>
+              <a
+                href="https://github.com/cursodsousa" target="_blank" className="hover:text-zinc-300
+                transition-colors"
+              >
+                Github
+              </a>
+
+              <a href="https://github.com/dougllasfps" target="_blank" className="hover:text-zinc-300
+              transition-colors"
+              >
+                Prendizagem
+              </a>
+              <a href="#" className="hover:text-zinc-300 transition-colors"> Facebook </a>
+              <a href="#" className="hover:text-zinc-300 transition-colors"> LinkedIn </a>
+              <a href="#" className="hover:text-zinc-300 transition-colors"> Instagram </a>
+              <a href="#" className="hover:text-zinc-300 transition-colors"> Youtube </a>
             </div>
           </div>
         </div>
