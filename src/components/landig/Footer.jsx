@@ -33,16 +33,6 @@ export default function Footer (){
                   Sobre
                 </a>
               </li>
-              {/*<li>*/}
-              {/*  <a href="" className="hover:text-zinc-300 transition-colors">*/}
-              {/*    Preços*/}
-              {/*  </a>*/}
-              {/*</li>*/}
-              {/*<li>*/}
-              {/*  <a href="#" className="hover:text-zinc-300 transition-colors">*/}
-              {/*    Blog*/}
-              {/*  </a>*/}
-              {/*</li>*/}
             </ul>
           </div>
 
@@ -55,19 +45,6 @@ export default function Footer (){
                   Sobre Nós
                 </a>
               </li>
-
-              {/*<li>*/}
-              {/*  <a href="" className="hover:text-white transition-colors">*/}
-              {/*    Carreiras*/}
-              {/*  </a>*/}
-              {/*</li>*/}
-
-              {/*<li>*/}
-              {/*  <a href="" className="hover:text-white transition-colors">*/}
-              {/*    Imprensa*/}
-              {/*  </a>*/}
-              {/*</li>*/}
-
               <li>
                 <a href="" className="hover:text-white transition-colors">
                   Contato
