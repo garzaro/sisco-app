@@ -55,15 +55,30 @@ export default function Contact() {
 
   return (
     <FormProvider {...methods} >
-      <section id="contacts" className="py-20 md:py-32 bg-zinc-900">
+      <section id="contacts" className="py-20 md:py-12 bg-zinc-900">
+        {/** voltar ao topo **/}
+        <span className="text-sm mb-1 mr-12 top-26 text-blue-700 flex relative justify-end">
+          <a href="#" className="hover:text-red-300 transition-colors duration-300">
+            Voltar ao topo
+          </a>
+        </span>
         <main onSubmit={handleSubmit(handleSubmitContact)} className="space-y-6">
           {/*action="https://formspree.io/f/xwvnzbjb" method="POST"*/}
           <form >
             <div className="container mx-auto px-4">
               <div className="max-w-2xl mx-auto">
+
                 {/** section header **/}
-                <div className="text-center mb-12">
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-300 mb-4"></h2>
+                <div className="relative h-full min-h-96 lg:min-h-full flex items-center justify-center">
+                  {/* Decorative Background Shape - inset-0 */}
+                  <div className="absolute  bg-linear-to-br from-slate-900 to-zinc-700 rounded-3xl opacity-50" />
+                  {/* Feature Cards - Floating Animation */}
+                  <div className="relative w-full max-w-md space-y-6">
+
+                </div>
+                  </div>
+                <div className="text-center mb-12 ">
+                  <p className="text-2xl md:text-4xl font-bold text-gray-300 mb-4">Entre em Contato</p>
                   <p className="text-lg text-gray-300">
                     Alguma dúvida ou problema? <br/> Nossa equipe está pronta para ajudar você a começar ou continuar sua
                     jornada.
