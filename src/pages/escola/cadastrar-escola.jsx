@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react";
-import * as messages from "@/components/toastr/toastr.jsx";
+import * as messages from "@/components/toastr/toastr.js";
 import {useState} from "react";
 import { motion } from "framer-motion";
 import {SchemaEscola} from "@/components/zod/schemaEscola.js";

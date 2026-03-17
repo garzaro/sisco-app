@@ -12,8 +12,8 @@ import UsuarioService from "@/app/service/usuarioService.js";
 import {Swiper, SwiperSlide} from "swiper/react";
 import { motion } from "framer-motion";
 import {Eye, EyeOff} from "lucide-react";
-import * as messages from "@/components/toastr/toastr.jsx"
-import SpinnerWithText from "@/components/spectrumui/spinner-with-text.jsx";
+import * as messages from "@/components/toastr/toastr.js"
+import SpinnerWithText from "@/components/spectrumui/Spinner-with-text.jsx";
 
 //import {useRef} from "react";
 

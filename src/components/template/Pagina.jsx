@@ -3,6 +3,8 @@ import Cabecalho from "./Cabecalho.jsx"
 import Menu from "./Menu.jsx"
 import Rodape from "./Rodape.jsx"
 import {Outlet} from "react-router-dom";
+import Header from "@/components/landig/Header.jsx";
+import LandingPage from "@/pages/home/LandingPage.jsx";
 
 /**
  * Componente principal da pagina
@@ -20,18 +22,20 @@ import {Outlet} from "react-router-dom";
 export default function Pagina() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Cabecalho className="h-20" />
+      {/*<Cabecalho className="h-20" />*/}
+      <Header/>
+      {/*<LandingPage />*/}
       {/*corpo da pagina*/}
       <div className="flex flex-1 boxed">
         {/*hidden*/}
-        <Menu className="hidden lg:block lg:w-64 xl:w-72 bg-zinc-900" />
+        {/*<Menu className="hidden lg:block lg:w-64 xl:w-72 bg-zinc-900" />*/}
         {/*conteudo principal*/}
         <main className="flex-1 bg-zinc-900 p-4">
           {/* aqui o React Router renderiza a rota filha com Outlet */}
           <Outlet />
         </main>
       </div>
-      <Rodape className="h-20" />
+      {/*<Rodape className="h-20" />*/}
     </div>
   )
 }

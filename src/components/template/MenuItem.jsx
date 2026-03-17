@@ -7,7 +7,7 @@ export default function MenuItem({ label, to, className='' }) {
       to={to}
       className={`
       block px-4 py-2 items-center hover:bg-zinc-800
-      rounded-full w-32 h-10 border-b-1 border-transparent
+      rounded-full w-32 h-10 border-b border-transparent
       hover:border-red-500 text-center
       ${className}
       `}

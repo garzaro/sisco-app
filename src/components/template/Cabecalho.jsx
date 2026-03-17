@@ -1,6 +1,8 @@
 import React from 'react'
 import Logo from "./Logo.jsx";
 import MenuUsuario from "./MenuUsuario.jsx";
+import Header from "@/components/landig/Header.jsx";
+import LandingPage from "@/pages/home/LandingPage.jsx";
 
 export default function Cabecalho({ className }) {
   return (
@@ -13,8 +15,9 @@ export default function Cabecalho({ className }) {
       ${ className }`}
     >
       <nav className="flex justify-between items-center gap-2 boxed">
+        <Header />
         <Logo />
-        <MenuUsuario/>
+        {/*<MenuUsuario/>*/}
       </nav>
     </header>
     )

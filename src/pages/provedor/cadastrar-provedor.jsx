@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react";
-import * as messages from "@/components/toastr/toastr.jsx";
+import * as messages from "@/components/toastr/toastr.js";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { motion } from "framer-motion";

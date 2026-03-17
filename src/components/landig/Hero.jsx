@@ -80,7 +80,7 @@ export default function Hero() {
                 <p className="text-sm text-slate-300">Escolas Ativas</p>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-slate-300">150+</div>
+                <div className="text-3xl font-bold text-slate-300">0+</div>
                 <p className="text-sm text-slate-300">Escolas</p>
               </div>
               <div className="space-y-2">

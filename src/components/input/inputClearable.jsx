@@ -53,7 +53,7 @@ export function InputClearablePassword({
           onClick={handleClear}
           aria-label={ariaLabel}
           className={
-            `absolute rounded-full h-6 w-6 bg-zinc-800 right-4 top-1/2 -translate-y-1/2 -mt-6
+            `absolute rounded-full h-6 w-6 bg-zinc-800 right-8 top-1/2 -translate-y-1/2 -mt-6
             text-zinc-200 hover:text-red-500 hover:bg-red-500/10 ${className}`}
         >
           ×

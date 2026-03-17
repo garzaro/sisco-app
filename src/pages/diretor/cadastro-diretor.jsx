@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from "react";
-import * as messages from "@/components/toastr/toastr.jsx";
+import * as messages from "@/components/toastr/toastr.js";
 import {FormProvider, useForm} from "react-hook-form";
 import {motion} from "framer-motion";
 import {SchemaDiretor} from "@/components/zod/schemaDiretor.js";

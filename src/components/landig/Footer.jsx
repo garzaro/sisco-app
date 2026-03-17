@@ -14,7 +14,7 @@ export default function Footer (){
               >
                 <span className="text-gray-300 font-bold"> SCE </span>
               </div>
-              <span className="text-gray-400 text-lg font-bold"> Sistema de de Consulta Escolar </span>
+              <span className="text-gray-400 text-lg font-bold"> Sistema Consulta Escolar </span>
             </div>
             <p className="text-gray-300 text-sm">Seu sistema de acompanhamento tecnologica escolar</p>
           </div>
@@ -45,6 +45,7 @@ export default function Footer (){
                   Sobre Nós
                 </a>
               </li>
+
               <li>
                 <a href="" className="hover:text-white transition-colors">
                   Contato
@@ -86,7 +87,9 @@ export default function Footer (){
           {/** bottom section **/}
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
             <p>&copy; { anoAtual } Sistema de Consulta Escolar. Todos os direitos tortos. </p>
-            <div className="flex gap-6 mt-4 md:mt-0">
+            <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400
+            gap-6 mt-4 md:mt-0"
+            >
               <a
                 href="https://github.com/cursodsousa" target="_blank" className="hover:text-zinc-300
                 transition-colors"

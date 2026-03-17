@@ -10,7 +10,7 @@ function UsuarioService()  {
         return await usuarioApi.post('/autenticar', credentials);
       } catch (error) {
         console.error("Erro ao autenticar:", error);
-        throw new Error("Não foi possivel autenticar.");
+        throw new Error("Erro inesperado ao fazer login, não foi possivel autenticar.");
       }
     },
 

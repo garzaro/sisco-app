@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import SpinnerWithText from "@/components/spectrumui/spinner-with-text.jsx";
+import SpinnerWithText from "@/components/spectrumui/Spinner-with-text.jsx";
 import {Label} from "@/components/ui/label.jsx";
 import {Input} from "@/components/ui/input.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import {Eye, EyeOff} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import * as messages from "@/components/toastr/toastr.jsx"
+import * as messages from "@/components/toastr/toastr.js"
 import UsuarioService from "@/app/service/usuarioService.js";
 import {SchemaLogin} from "@/components/zod/schemaUsuario.js";
 import {InputClearable, InputClearablePassword} from "@/components/input/inputClearable.jsx";
@@ -71,23 +71,23 @@ function LoginForm () {
    **/
   const login = (data) => {
     // storageUsuario.removerItem('_usuario_logado');
-    console.log("LOGIN DISPARADO", data);
     service.autenticar(
       {
         email:data.email,
         password:data.password
-      }
-    )
-      .then(response => {
-      console.error("Promessa cumprida ", response);
+      }).then(response => {
         // storageUsuario.salvarItem('_usuario_logado', res.data);
-        reset()
-        setTimeout(() => navigate ("/"), 2500)
-        messages.successMessage(response.data?.message || response.data?.status || "$uuuuÇÇeçuuu");
+        reset() //setEmail(''); setPassword('');
+        setTimeout(() => navigate ("/home"), 1000);
+        messages.successMessage(response.data?.message || response.data?.status );
     }).catch(err => {
-      console.error("ERRO LOGIN", err);
-      messages.errorLoginMessage(err.response.data?.message || "Erro inesperado ao fazer login");
+      messages.errorLoginMessage(err.response?.data?.message);
+      console.error("ERRO LOGIN ==> ", err);
     })
+  }
+
+  const handleCancelar = () =>{
+    setTimeout(() => navigate("/"), 500);
   }
 
   {/** feedback **/}
@@ -96,14 +96,18 @@ function LoginForm () {
   return (
     <FormProvider {...methods}>
 
-      <main className="overflow-hidden bg-zinc-900 flex items-center justify-center">
+      <main className="relative container mx-auto px-4 md:px-8 py-10 md:py-24 lg:py-2 min-h-screen overflow-hidden
+      flex items-center justify-center"
+      >
         <form
           onSubmit={handleSubmit(login)} /**high order functon**/
-          className="w-full max-w-xl mx-auto p-16 rounded-2xl shadow-xl bg-zinc-950"
+          className="w-full max-w-xl mx-auto border p-10 rounded-2xl shadow-xl bg-zinc-800"
         >
           <div className="overflow-hidden w-full relative">
-            <div className="w-full flex-shrink-0 p-4 space-y-4">
-              <h2 className="text-xl font-semibold mb-4">Faça login na sua conta</h2>
+            <div className="w-full shrink-0 p-4 space-y-4">
+              <h2 className="text-xl text-zinc-300 justify-center font-semibold mb-4">
+                Faça login na sua conta
+              </h2>
                 
               {/** username **/}
               <div className="flex flex-col gap-1">
@@ -116,7 +120,7 @@ function LoginForm () {
                   {...register("email", )}
                   id="label-email"
                   placeholder="Digite o email"
-                  className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
+                  className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl
                   w-full h-10 text-zinc-200"
                 />
                 <InputClearable
@@ -143,7 +147,7 @@ function LoginForm () {
                     placeholder="Digite a senha"
                     className="
                       border-l-2 border-zinc-600 hover:border-l-red-400
-                      shadow-sm rounded w-full h-10 text-zinc-200 pr-10"
+                      shadow-sm rounded-2xl w-full h-10 text-zinc-200 pr-10"
                   />
                   {/**zolhos da senha**/}
                   <button
@@ -158,6 +162,7 @@ function LoginForm () {
                     fieldName="password"
                     setValue={setValue}
                     ariaLabel="Limpar campo"
+                    className="py-1"
                   />
                 </div>
                 {errors.password && (
@@ -166,15 +171,15 @@ function LoginForm () {
 
               {/** esqueceu a senha **/}
               </div>
-              <div className="font-semibold text-sm">
-                Esquece a senha? <Link to="/" className="text-sm text-blue-200">Clique aqui !</Link>
+              <div className="text-zinc-300 font-semibold text-sm">
+                Esqueceu a senha? <Link to="/" className="text-sm text-blue-200">Clique aqui.</Link>
               </div>
 
               {/** botoes **/}
               <div className="flex justify-between ">
                 <Button
                   type="button"
-                  //onClick={handleCancelar}
+                  onClick={handleCancelar}
                   className="
                   w-28
                   bg-red-500/40
