@@ -1,4 +1,10 @@
+/**
+ * Unica responsabilidade ler/escrever/remover dados de autenticação
+ * **/
+import {LocalStorageService} from "@/app/service/LocalStorageService.js";
 
+
+const storageLocal = LocalStorageService();
 
 const TOKEN_KEY = 'token_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';
 
@@ -12,7 +18,7 @@ export const authService = {
     localStorage.removeItem( TOKEN_KEY );
   },
 
-  isAuthenticated(){
+  isAuthenticated()CONTINUAR COM A AUTH PARA CHAVE DO USUARIO LOGADO EM APPLICATION
     return !!localStorage.getItem( TOKEN_KEY );
   },
 
