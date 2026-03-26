@@ -15,7 +15,7 @@ export function WaveSpinner() {
 const SpinnerWithText = ({ title }) => {
 
   return (
-    <div className="fixed inset-0 bg-black-60 backdrop-blur-2xl flex justify-center items-center gap-3 z-[50] animate-fade-in">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-2xl flex justify-center items-center gap-3 z-[50] animate-fade-in">
       <div className="flex flex-col items-center gap-4">
         {/*<Spinner className="text-emerald-400">{title}</Spinner>*/}
         {/*<Spinner className="text-emerald-400"/>*/}

@@ -1,14 +1,14 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {Navigate} from "react-router";
-import PrivateLayout from "@/layout/PrivateLayout.jsx";
-import PublicLayout from "@/layout/PublicLayout.jsx";
-import ProtectedRoute from "@/routes/ProtectedRoute.jsx";
-import Home from "@/pages/home/home.jsx";
 import AuthProvider from "@/auth/AuthProvider.jsx";
+import PublicLayout from "@/layout/PublicLayout.jsx";
 import LandingPage from "@/pages/home/LandingPage.jsx";
 import LoginForm from "@/pages/login/LoginForm.jsx";
 import UsuarioCreate from "@/pages/Usuario/cadastrar-usuario.jsx";
+import Home from "@/pages/home/home.jsx";
+import ProtectedRoute from "@/routes/ProtectedRoute.jsx";
+import PrivateLayout from "@/layout/PrivateLayout.jsx";
+
 
 
 /**
@@ -16,7 +16,7 @@ import UsuarioCreate from "@/pages/Usuario/cadastrar-usuario.jsx";
  * Funciona em dev (npm start, vite)
  * ❌ Quebra em produção se o servidor não tiver rewrite.
  * Usar createHashRouter
- *
+ * [] CONTINUAR COM O O LOGIN, REDIRECIONAR PARA HOME AO LOGAR, HEADER PARA LOGIN PAGE VE IA, JA ESTA PRONTO LA
  * Uso replace para não adicionar entrada no histórico do navegador
  *
  * https://github.com/copilot/c/df8b1f8e-d472-44cb-81ea-027ec3ba27b0
@@ -26,43 +26,30 @@ import UsuarioCreate from "@/pages/Usuario/cadastrar-usuario.jsx";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      {/** ROTA PUBLICA **/}
-      <Route
-        path="/"
-        element={
-        <PublicLayout>
-          <LandingPage />
-        </PublicLayout>
+    <AuthProvider>
+      <Routes>
+        {/** ROTA PUBLICA **/}
+        <Route
+          path="/"
+          element={
+          <PublicLayout>
+            <LandingPage/>
+          </PublicLayout>
         }
       />
-      <Route
-        path="/LoginForm"
-        element={
-        <PublicLayout>
-          <LoginForm />
-        </PublicLayout>
-        }
-      />
-      {/*CONTINUAR COM O O LOGIN, REDIRECIONAR PARA HOME AO LOGAR, HEADER PARA LOGIN PAGE VE IA, JA ESTA PRONTO LA*/}
-      <Route
-        path="/cadastrar-usuario"
-        element={
-        <PublicLayout>
-          <UsuarioCreate />
-        </PublicLayout>
-        }
-      />
+      <Route path="/login-form" element={ <LoginForm /> } />
+      <Route path="/cadastrar-usuario" element={ <UsuarioCreate /> } />
+      {/*<Route path="/redefinir-senha" element={ <RedefinirSenha /> } />*/}
 
       {/** ROTAS PROTEGIDAS **/}
       <Route
         path="/home"
         element={
-        // <ProtectedRoute>
-        //   <PrivateLayout>
+        <ProtectedRoute>
+          <PrivateLayout>
             <Home />
-          // </PrivateLayout>
-        // </ProtectedRoute>
+          </PrivateLayout>
+        </ProtectedRoute>
         }
       />
         {/*<Route path="/home" element={<Home />} />*/}
@@ -77,6 +64,7 @@ const AppRoutes = () => {
       {/*/!** Fallback - qualquer rota não mapeada é redirecionada para a raiz **!/*/}
       {/*<Route path="*" element={<Navigate to="/" replace />} />*/}
     </Routes>
+    </AuthProvider>
   )
 }
 

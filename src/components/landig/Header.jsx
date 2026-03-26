@@ -20,7 +20,6 @@ export default function Header(){
 
   return (
     <>
-
       <header className="fixed top-0 left-0 right-0 bg-zinc-900 border-b border-gray-600 z-50">
         <div className="container mx-auto px-4 py-10 flex items-center justify-between">
 
@@ -63,7 +62,7 @@ export default function Header(){
             ) : (
               <Button
                 className="border-gray-300 text-gray-900 rounded hover:bg-zinc-400 transition-colors duration-300"
-                onClick={() => navigate("/LoginForm")}
+                onClick={() => navigate("/login-form")}
               >
                 Entrar
               </Button>

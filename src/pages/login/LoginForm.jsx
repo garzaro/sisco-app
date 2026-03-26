@@ -11,6 +11,8 @@ import * as messages from "@/components/toastr/toastr.js"
 import UsuarioService from "@/app/service/usuarioService.js";
 import {SchemaLogin} from "@/components/zod/schemaUsuario.js";
 import {InputClearable, InputClearablePassword} from "@/components/input/inputClearable.jsx";
+import {Tooltip} from "@mui/material";
+import {useAuth} from "@/auth/useAuth.js";
 /**
  * TODO-LIST
  * criar tela de login de alto nível, equilibrar segurança, usabilidade (UX) e acessibilidade.
@@ -51,6 +53,7 @@ import {InputClearable, InputClearablePassword} from "@/components/input/inputCl
 const schema = SchemaLogin();
 
 function LoginForm () {
+  const { login } = useAuth();
 
   const methods = useForm({
     resolver: zodResolver(schema),
@@ -61,54 +64,95 @@ function LoginForm () {
     mode: "onTouched"
   });
   const {register, handleSubmit, setValue, watch, reset, formState: {errors}} = methods;
+
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const  service = UsuarioService();
+  const destinationBack = location.state?.from?.pathname || '/home';
 
   /**
    * @param removerItem - limpe a chave antiga
    * @param setItem - salvar a chave - identificação
    **/
-  const login = (data) => {
+  const handleLogin = (data) => {
     // storageUsuario.removerItem('_usuario_logado');
     service.autenticar(
       {
         email:data.email,
         password:data.password
       }).then(response => {
-        // storageUsuario.salvarItem('_usuario_logado', res.data);
-        reset() //setEmail(''); setPassword('');
-        setTimeout(() => navigate ("/home"), 1000);
+        const user = response.data;
+        const token = response.data.token || 'Este_token_vai_vir_do_servidor_depois'
+        login(token, user);
+        setLoading(true);
+        reset(); //setEmail(''); setPassword('');
+        // setTimeout(() => {
+        //   setLoading(false);
+        //   navigate ("/home");
+        // }, 2500);
+        setTimeout(() => navigate(destinationBack,{replace: true}), 2000);
         messages.successMessage(response.data?.message || response.data?.status );
     }).catch(err => {
       messages.errorLoginMessage(err.response?.data?.message);
       console.error("ERRO LOGIN ==> ", err);
-    })
-  }
+    });
+  };
 
   const handleCancelar = () =>{
     setTimeout(() => navigate("/"), 500);
   }
 
-  {/** feedback **/}
-  {/*{ loading && <SpinnerWithText title="Salvando" /> }*/}
-
   return (
     <FormProvider {...methods}>
+
+      <header className="bg-zinc-900 shadow-sm border-b border-gray-600 py-4 px-6 flex
+        justify-between items-center"
+      >
+        <div className="flex items-center gap-2">
+          <div className="bg-emerald-600 p-2 rounded-full animate-pulse"></div>
+          <span className="text-xl font-bold text-gray-300 tracking-tight">
+            <Link to="/" className="text-decoration-none">
+              Sistema de Consulta Escolar
+            </Link>
+          </span>
+        </div>
+
+        <nav>
+          <span className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-all ">
+            <Tooltip
+              title="Se ainda não possui acesso, clique no botão abaixo,
+              crie sua conta e obtenha acesso ao Financas Pessoais."
+              placement="right-end"
+            >
+                Ainda não tem conta?
+            </Tooltip>
+          </span>
+          <Link
+            to="/cadastrar-usuario"
+            className="text-sm min-h-screen font-semibold hover:text-emerald-700 transition-all"
+          >
+            <span className="underline"> Cadastre-se </span>
+          </Link>
+        </nav>
+      </header>
+
+      {/** feedback **/}
+      { loading && <SpinnerWithText title="Redirecionando" /> }
 
       <main className="relative container mx-auto px-4 md:px-8 py-10 md:py-24 lg:py-2 min-h-screen overflow-hidden
       flex items-center justify-center"
       >
         <form
-          onSubmit={handleSubmit(login)} /**high order functon**/
+          onSubmit={handleSubmit(handleLogin)} /**high order functon**/
           className="w-full max-w-xl mx-auto border p-10 rounded-2xl shadow-xl bg-zinc-800"
         >
           <div className="overflow-hidden w-full relative">
             <div className="w-full shrink-0 p-4 space-y-4">
-              <h2 className="text-xl text-zinc-300 justify-center font-semibold mb-4">
+              <h2 className="text-xl text-zinc-300 justify-center items-center text-center font-semibold mb-4">
                 Faça login na sua conta
               </h2>
-                
+
               {/** username **/}
               <div className="flex flex-col gap-1">
                 <Label htmlFor="label-email">
@@ -180,6 +224,7 @@ function LoginForm () {
                 <Button
                   type="button"
                   onClick={handleCancelar}
+                  disabled={loading}
                   className="
                   w-28
                   bg-red-500/40
@@ -197,6 +242,7 @@ function LoginForm () {
 
                 <Button
                   type="submit"
+                  disabled={loading}
                   className="
                   w-28
                   bg-emerald-500

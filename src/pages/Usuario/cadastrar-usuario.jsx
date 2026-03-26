@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input.jsx";
 import {Label} from "@/components/ui/label.jsx";
@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import {Eye, EyeOff} from "lucide-react";
 import * as messages from "@/components/toastr/toastr.js"
 import SpinnerWithText from "@/components/spectrumui/Spinner-with-text.jsx";
+import {Tooltip} from "@mui/material";
 
 //import {useRef} from "react";
 
@@ -154,239 +155,280 @@ function UsuarioCreate() {
     await new Promise(resolve => setTimeout(resolve, 3000)) /**spinner**/
     setLoading(false);
   }
-  //h-screen bg-zinc-950 flex items-center justify-center - form w-full  formProvidaer{...methods}
+
   return (
     <FormProvider {...methods}>
+      <header className="bg-zinc-900 shadow-sm border-b border-gray-600 py-4 px-6 flex
+        justify-between items-center"
+      >
+        <div className="flex items-center gap-2">
+          <div className="bg-emerald-600 p-2 rounded-full animate-pulse"></div>
+          <span className="text-xl font-bold text-gray-300 tracking-tight">
+            <Link to="/" className="text-decoration-none">
+              Sistema de Consulta Escolar
+            </Link>
+          </span>
+        </div>
+
+        <nav>
+          <span className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-all ">
+            <Tooltip
+              title="Se ainda não possui acesso, clique no botão abaixo,
+              crie sua conta e obtenha acesso ao Financas Pessoais."
+              placement="right-end"
+            >
+                Ainda não tem conta?
+            </Tooltip>
+          </span>
+          <Link
+            to="/cadastrar-usuario"
+            className="text-sm min-h-screen font-semibold hover:text-emerald-700 transition-all"
+          >
+            <span className="underline"> Cadastre-se </span>
+          </Link>
+        </nav>
+      </header>
+
       {/**feedback**/}
       { loading && <SpinnerWithText title="Salvando" /> }
 
-      <main className="overflow-hidden bg-zinc-900 flex items-center justify-center">
+      <main className="relative container mx-auto px-4 md:px-8 py-8 md:py-20 lg:py-2 min-h-screen overflow-hidden
+      flex items-center justify-center"
+      >
         <form
           onSubmit={handleSubmit(usuarioSave)} /**high order functon**/
-          className="w-full max-w-xl mx-auto p-6 rounded-2xl shadow-xl bg-zinc-950"
+          className="w-full max-w-xl mx-auto border p-10 rounded-2xl shadow-xl mb-20 bg-zinc-800"
         >
           <div className="overflow-hidden w-full relative">
-            <motion.div
-              className="flex"
-              animate={{x: `-${step * 100}%`}}
-              transition={{type: "spring", stiffness: 1000, damping: 30}}
-            >
-              {/** step 1
-               flex-shrink-0 = esconde
-               space-y-4 = espaço xy
-               **/}
-              <section className="w-full  flex-shrink-0 p-4 space-y-4">
-                <h2 className="text-xl font-semibold mb-4">Informações Pessoais</h2>
+            <div className="w-full shrink-0 p-2 space-y-4">
+              <h2 className="text-3xl text-zinc-300 justify-center items-center text-center font-semibold mb-4">
+                Faça sua conta
+              </h2>
+              <motion.div
+                className="flex"
+                animate={{x: `-${step * 100}%`}}
+                transition={{type: "spring", stiffness: 1000, damping: 30}}
+              >
+                {/** step 1
+                 flex-shrink-0 = esconde
+                 space-y-4 = espaço xy
+                 **/}
+                <section className="w-full  shrink-0 p-2 space-y-4">
+                  <h2 className="text-sm text-zinc-300 justify-center items-center text-center font-semibold mb-6">
+                    Informações Pessoais
+                  </h2>
 
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-nome-completo">
-                    Nome Completo
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    {...register("nomeCompleto", {required: true})}
-                    id="label-nome-completo"
-                    placeholder="Digite o nome completo"
-                    className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                    w-96 h-10 text-zinc-200"
-                  />
-                  {errors.nomeCompleto &&
-                    <span className=" text-sm text-red-300 ">{errors.nomeCompleto.message}</span>}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-cpf">
-                    CPF
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    {...register("cpf", {required: true})}
-                    id="label-cpf"
-                    placeholder="Digite o CPF"
-                    className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                     w-96 h-10 text-zinc-200"
-                  />
-                  {errors.cpf &&
-                    <span className=" text-sm text-red-300 ">{errors.cpf.message}</span>}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-username">
-                    Usuário
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    {...register("username", {required: true})}
-                    id="label-username"
-                    placeholder="Digite o nome de usuário"
-                    className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                    w-96 h-10 text-zinc-200"
-                  />
-                  {errors.username &&
-                    <span className=" text-sm text-red-300 ">{errors.username.message}</span>}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-email">
-                    E-mail
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <Input
-                    type="email"
-                    {...register("email", {required: true})}
-                    id="label-email"
-                    placeholder="Digite o e-mail"
-                    className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                     w-96 h-10 text-zinc-200"
-                  />
-                  {errors.email &&
-                    <span className=" text-sm text-red-300 ">{errors.email.message}</span>}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-email-confirm">
-                    Confirme o e-mail
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    {...register("email_confirm", {
-                      required: true,
-                      validate: value => value === email || 'Emails não conferem' /**se falhar o schema**/
-                    })}
-                    onPaste={(e) => e.preventDefault()}
-                    id="label-email-confirm"
-                    placeholder="Confirme o e-mail"
-                    className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                     w-96 h-10 text-zinc-200"
-                  />
-                  {errors.email_confirm &&
-                    <span className=" text-sm text-red-300 ">{errors.email_confirm.message}</span>}
-                </div>
-
-                {/*botões*/}
-                <div className="flex justify-between py-4"> {/**gap-6 py-4**/}
-                  <Button
-                    type="button"
-                    onClick={next}
-                    className="flex w-28 bg-emerald-500 hover:bg-emerald-600 text-zinc-100 font-bold h-10
-                    rounded-full border-l-2 border-zinc-100 hover:border-l-orange-400 shadow-sm"
-                  >
-                    PRÓXIMO
-                  </Button>
-
-                  <Button
-                    type="button"
-                    //onClick={handleCancelar}
-                    className="flex w-28 bg-red-500 hover:bg-red-400 text-zinc-100 font-bold h-10 rounded-full
-                     border-l-2 border-zinc-100 hover:border-l-red-200 shadow-sm"
-                  >
-                    CANCELAR
-                  </Button>
-                </div>
-              </section>
-
-              {/* STEP 2 - senha */}
-              <section className="w-full flex-shrink-0 p-4 space-y-4">
-                <h2 className="text-xl font-semibold mb-4">Segurança</h2>
-
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-password">
-                    Senha
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <div className="relative w-96">
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-nome-completo">
+                      Nome Completo
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
                     <Input
-                      type={show ? "text" : "password"}
-                      {...register("password", {required: true})}
-                      id="label-password"
-                      placeholder="Digite a senha"
-                      className="
-                      border-l-2 border-zinc-600 hover:border-l-red-400
-                      shadow-sm rounded w-full h-10 text-zinc-200 pr-10"
+                      type="text"
+                      {...register("nomeCompleto", {required: true})}
+                      id="label-nome-completo"
+                      placeholder="Digite o nome completo"
+                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
                     />
-                    {/**zolhos da senha**/}
-                    <button
-                      type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
-                      onClick={() => setShow(!show)}
-                    >
-                      {show ? <EyeOff size={20}/> : <Eye size={20}/>}
-                    </button>
+                    {errors.nomeCompleto &&
+                      <span className=" text-sm text-red-300 ">{errors.nomeCompleto.message}</span>}
                   </div>
-                  {errors.password && (
-                    <span className="text-sm text-red-300">{errors.password.message}</span>
-                  )}
-                </div>
 
-                <div className="flex flex-col gap-1">
-                  <Label htmlFor="label-confirm-password">
-                    Confirmar senha
-                    <span className="text-red-400 font-bold text-sm">*</span>
-                  </Label>
-                  <div className="relative w-96">
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-cpf">
+                      CPF
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
                     <Input
-                      type={showConfirm ? "text" : "password"}
-                      {...register("confirm_password", {
+                      type="text"
+                      {...register("cpf", {required: true})}
+                      id="label-cpf"
+                      placeholder="Digite o CPF"
+                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
+                    />
+                    {errors.cpf &&
+                      <span className=" text-sm text-red-300 ">{errors.cpf.message}</span>}
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-username">
+                      Usuário
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
+                    <Input
+                      type="text"
+                      {...register("username", {required: true})}
+                      id="label-username"
+                      placeholder="Digite o nome de usuário"
+                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
+                    />
+                    {errors.username &&
+                      <span className=" text-sm text-red-300 ">{errors.username.message}</span>}
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-email">
+                      E-mail
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
+                    <Input
+                      type="email"
+                      {...register("email", {required: true})}
+                      id="label-email"
+                      placeholder="Digite o e-mail"
+                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
+                    />
+                    {errors.email &&
+                      <span className=" text-sm text-red-300 ">{errors.email.message}</span>}
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-email-confirm">
+                      Confirme o e-mail
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
+                    <Input
+                      type="text"
+                      {...register("email_confirm", {
                         required: true,
-                        validate: value => value === password || "As senhas não são iguais", /**se falhar o schema**/
+                        validate: value => value === email || 'Emails não conferem' /**se falhar o schema**/
                       })}
                       onPaste={(e) => e.preventDefault()}
-                      id="label-confirm-password"
-                      placeholder="Confirme a senha"
-                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded
-                     w-96 h-10 text-zinc-200"
+                      id="label-email-confirm"
+                      placeholder="Confirme o e-mail"
+                      className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
                     />
-                    {/**zolhos da senha**/}
-                    <button
-                      type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
-                      onClick={() => setShowConfirm(!showConfirm)}
-                    >
-                      {showConfirm ? <EyeOff size={20}/> : <Eye size={20}/>}
-                    </button>
+                    {errors.email_confirm &&
+                      <span className=" text-sm text-red-300 ">{errors.email_confirm.message}</span>}
                   </div>
-                  {errors.confirm_password &&
-                    <span className=" text-sm text-red-300 ">{errors.confirm_password.message}</span>}
-                </div>
 
-                <div className="flex justify-between py-4"> {/**gap-6 py-4**/}
-                  <Button
-                    type="button"
-                    onClick={prev}
-                    className="flex w-28 bg-red-500 hover:bg-red-400 text-zinc-100 font-bold h-10 rounded-full
-                     border-l-2 border-zinc-100 hover:border-l-red-200 shadow-sm"
-                  >
-                    VOLTAR
-                  </Button>
+                  {/*botões*/}
+                  <div className="flex justify-between py-4"> {/**gap-6 py-4**/}
+                    <Button
+                      type="button"
+                      onClick={next}
+                      className="flex w-28 bg-emerald-500 hover:bg-emerald-600 text-zinc-100 font-bold h-10
+                      rounded-full border-l-2 border-zinc-100 hover:border-l-orange-400 shadow-sm"
+                    >
+                      PRÓXIMO
+                    </Button>
 
-                  <Button
-                    type="submit"
-                    className="flex w-28 bg-emerald-500 hover:bg-emerald-600 text-zinc-100 font-bold h-10
-                    rounded-full border-l-2 border-zinc-100 hover:border-l-orange-400 shadow-sm"
-                  >
-                    FINALIZAR
-                  </Button>
-                </div>
-              </section>
-            </motion.div>
-          </div>
+                    <Button
+                      type="button"
+                      className="flex w-28 bg-red-500 hover:bg-red-400 text-zinc-100 font-bold h-10 rounded-full
+                       border-l-2 border-zinc-100 hover:border-l-red-200 shadow-sm"
+                      onClick={() => navigate("/")}
+                    >
+                      CANCELAR
+                    </Button>
+                  </div>
+                </section>
 
-          {/* DOTS - barra de progresso - bolinhas*/}
-          <div className="flex justify-center gap-3 mt-6">
-            {[0, 1].map((i) => (
-              <button
-                key={i}
-                onClick={() => setStep(i)}
-                type="button"
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  step === i ? "bg-blue-500/50 scale-125" : "bg-gray-300"
-                }`}
-              />
-            ))}
+                {/* STEP 2 - senha **************************/}
+                <section className="w-full  shrink-0 p-4 space-y-4">
+                  <h2 className="text-sm text-zinc-300 justify-center items-center text-center font-semibold mb-6">
+                    Informações Pessoais
+                  </h2>
+
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-password">
+                      Senha
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
+                    <div className="relative w-full">
+                      <Input
+                        type={show ? "text" : "password"}
+                        {...register("password", {required: true})}
+                        id="label-password"
+                        placeholder="Digite a senha"
+                        className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
+                      />
+                      {/**zolhos da senha**/}
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
+                        onClick={() => setShow(!show)}
+                      >
+                        {show ? <EyeOff size={20}/> : <Eye size={20}/>}
+                      </button>
+                    </div>
+                    {errors.password && (
+                      <span className="text-sm text-red-300">{errors.password.message}</span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <Label htmlFor="label-confirm-password">
+                      Confirmar senha
+                      <span className="text-red-400 font-bold text-sm">*</span>
+                    </Label>
+                    <div className="relative w-full">
+                      <Input
+                        type={showConfirm ? "text" : "password"}
+                        {...register("confirm_password", {
+                          required: true,
+                          validate: value => value === password || "As senhas não são iguais", /**se falhar o schema**/
+                        })}
+                        onPaste={(e) => e.preventDefault()}
+                        id="label-confirm-password"
+                        placeholder="Confirme a senha"
+                        className="border-l-2 border-zinc-600 hover:border-l-red-400 shadow-sm rounded-2xl w-full
+                       h-10 text-zinc-200"
+                      />
+                      {/**zolhos da senha**/}
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
+                        onClick={() => setShowConfirm(!showConfirm)}
+                      >
+                        {showConfirm ? <EyeOff size={20}/> : <Eye size={20}/>}
+                      </button>
+                    </div>
+                    {errors.confirm_password &&
+                      <span className=" text-sm text-red-300 ">{errors.confirm_password.message}</span>}
+                  </div>
+                  <div className="flex justify-between py-4"> {/**gap-6 py-4**/}
+                    <Button
+                      type="button"
+                      onClick={prev}
+                      className="flex w-28 bg-red-500 hover:bg-red-400 text-zinc-100 font-bold h-10 rounded-full
+                       border-l-2 border-zinc-100 hover:border-l-red-200 shadow-sm"
+                    >
+                      VOLTAR
+                    </Button>
+
+                    <Button
+                      type="submit"
+                      className="flex w-28 bg-emerald-500 hover:bg-emerald-600 text-zinc-100 font-bold h-10
+                      rounded-full border-l-2 border-zinc-100 hover:border-l-orange-400 shadow-sm"
+                    >
+                      FINALIZAR
+                    </Button>
+                  </div>
+                </section>
+              </motion.div>
+            </div>
+
+            {/* DOTS - barra de progresso - bolinhas*/}
+            <div className="flex justify-center gap-3 mt-6">
+              {[0, 1].map((i) => (
+                <button
+                  key={i}
+                  onClick={() => setStep(i)}
+                  type="button"
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    step === i ? "bg-blue-500/50 scale-125" : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+
           </div>
         </form>
         {/*<ToastContainer position="bottom-center" autoClose={3000} />*/}
@@ -395,6 +437,20 @@ function UsuarioCreate() {
   )
 }
 export default UsuarioCreate;
+
+
+// <h2 className="text-sm text-zinc-300 justify-center items-center text-center font-semibold mb-6">
+//   Escolha uma senha forte para maior segurança
+// </h2>
+//
+
+//
+
+//
+
+
+
+
 
 /**
  *
