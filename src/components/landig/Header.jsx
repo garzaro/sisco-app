@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/button.jsx";
 import {Menu, X} from "lucide-react";
 // import {getLoginUrl} from "/utils/auth";
 
+// PRECISA RESOLVER O PROBLEMAS DE LOGIN VER SE TEM ALGUMA COISA NO FINANCAS QUE POSSA SER COLOCA AQUI
 
 export default function Header(){
 
