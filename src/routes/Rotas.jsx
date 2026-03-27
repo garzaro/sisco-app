@@ -1,13 +1,18 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import AuthProvider from "@/auth/AuthProvider.jsx";
+import {AuthProvider} from "@/auth/AuthProvider.jsx";
 import PublicLayout from "@/layout/PublicLayout.jsx";
-import LandingPage from "@/pages/home/LandingPage.jsx";
+import LandingPage from "@/pages/home/landingPage.jsx";
 import LoginForm from "@/pages/login/LoginForm.jsx";
 import UsuarioCreate from "@/pages/Usuario/cadastrar-usuario.jsx";
 import Home from "@/pages/home/home.jsx";
 import ProtectedRoute from "@/routes/ProtectedRoute.jsx";
 import PrivateLayout from "@/layout/PrivateLayout.jsx";
+import RedefinirSenha from "@/pages/login/Redefinir-senha.jsx";
+import EscolaCreate from "@/pages/escola/cadastrar-escola.jsx";
+import DiretorCreate from "@/pages/diretor/cadastro-diretor.jsx";
+import ProvedorCreate from "@/pages/provedor/cadastrar-provedor.jsx";
+import {Navigate} from "react-router";
 
 
 
@@ -39,7 +44,7 @@ const AppRoutes = () => {
       />
       <Route path="/login-form" element={ <LoginForm /> } />
       <Route path="/cadastrar-usuario" element={ <UsuarioCreate /> } />
-      {/*<Route path="/redefinir-senha" element={ <RedefinirSenha /> } />*/}
+      <Route path="/redefinir-senha" element={ <RedefinirSenha /> } />
 
       {/** ROTAS PROTEGIDAS **/}
       <Route
@@ -52,29 +57,52 @@ const AppRoutes = () => {
         </ProtectedRoute>
         }
       />
-        {/*<Route path="/home" element={<Home />} />*/}
 
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <PrivateLayout>
+                <EscolaCreate />
+              </PrivateLayout>
+            </ProtectedRoute>
+          }
+        />
 
-      {/*<Route element={<ProtectedRoute isAllowed={ isLogged } redirectPath="/home" />}>*/}
-      {/*  <Route path="/cadastrar-escola" element={<EscolaCreate />} />*/}
-      {/*  <Route path="/cadastrar-diretor" element={<DiretorCreate />} />*/}
-      {/*  <Route path="/cadastrar-provedor" element={<ProvedorCreate />} />*/}
-      {/*</Route>*/}
+      <Route
+        path="/cadastrar-escola"
+        element={
+          <ProtectedRoute>
+            <PrivateLayout>
+              <DiretorCreate />
+            </PrivateLayout>
+        </ProtectedRoute>
+        }
+      />
 
-      {/*/!** Fallback - qualquer rota não mapeada é redirecionada para a raiz **!/*/}
-      {/*<Route path="*" element={<Navigate to="/" replace />} />*/}
-    </Routes>
+        <Route
+          path="/cadastrar-provedor"
+          element={
+            <ProtectedRoute>
+              <PrivateLayout>
+                <ProvedorCreate />
+              </PrivateLayout>
+            </ProtectedRoute>
+          }
+        />
+        {/*** Fallback - qualquer rota não mapeada é redirecionada para a raiz ***/}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </AuthProvider>
   )
 }
 
-const Rotas = ({ loggedUser }) => {
+const Rotas = () => {
   return(
     <AuthProvider>
       {/** contexto **/}
       <Router>
-        {/*redirectPath="/"*/}
-        <AppRoutes isLogged={loggedUser} />
+        <AppRoutes/>
       </Router>
     </AuthProvider>
   );

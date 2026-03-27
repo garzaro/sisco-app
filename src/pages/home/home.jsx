@@ -3,7 +3,9 @@ import React from "react";
 function Home(){
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-4">Seja bem-vindo!</h2>
+      <h2 className="text-2xl font-semibold mb-4">
+        <i className="text-red-500">Estamos logado, </i>
+         Seja bem-vindo!</h2>
       <p>
         Este é o conteúdo principal da página. Ajuste o tamanho da tela para ver
         o menu desaparecer em modo mobile (hidden em telas pequenas).

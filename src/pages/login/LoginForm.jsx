@@ -12,7 +12,8 @@ import UsuarioService from "@/app/service/usuarioService.js";
 import {SchemaLogin} from "@/components/zod/schemaUsuario.js";
 import {InputClearable, InputClearablePassword} from "@/components/input/inputClearable.jsx";
 import {Tooltip} from "@mui/material";
-import {useAuth} from "@/auth/useAuth.js";
+import {useAuth} from "@/auth/useAuth.jsx";
+
 /**
  * TODO-LIST
  * criar tela de login de alto nível, equilibrar segurança, usabilidade (UX) e acessibilidade.
@@ -54,7 +55,7 @@ const schema = SchemaLogin();
 
 function LoginForm () {
   const { login } = useAuth();
-
+  const  service = UsuarioService();
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -64,11 +65,9 @@ function LoginForm () {
     mode: "onTouched"
   });
   const {register, handleSubmit, setValue, watch, reset, formState: {errors}} = methods;
-
-  const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const  service = UsuarioService();
   const destinationBack = location.state?.from?.pathname || '/home';
 
   /**
@@ -76,7 +75,8 @@ function LoginForm () {
    * @param setItem - salvar a chave - identificação
    **/
   const handleLogin = (data) => {
-    // storageUsuario.removerItem('_usuario_logado');
+    setLoading( true )
+
     service.autenticar(
       {
         email:data.email,
@@ -84,16 +84,12 @@ function LoginForm () {
       }).then(response => {
         const user = response.data;
         const token = response.data.token || 'Este_token_vai_vir_do_servidor_depois'
-        login(token, user);
-        setLoading(true);
-        reset(); //setEmail(''); setPassword('');
-        // setTimeout(() => {
-        //   setLoading(false);
-        //   navigate ("/home");
-        // }, 2500);
+        login( token, user );
+        reset();
         setTimeout(() => navigate(destinationBack,{replace: true}), 2000);
         messages.successMessage(response.data?.message || response.data?.status );
     }).catch(err => {
+      setLoading( false );
       messages.errorLoginMessage(err.response?.data?.message);
       console.error("ERRO LOGIN ==> ", err);
     });
@@ -185,7 +181,7 @@ function LoginForm () {
                 </Label>
                 <div className="relative w-full">
                   <Input
-                    type={show ? "text" : "password"}
+                    type={showPassword ? "text" : "password"}
                     {...register("password", {required: true})}
                     id="label-password"
                     placeholder="Digite a senha"
@@ -197,9 +193,9 @@ function LoginForm () {
                   <button
                     type="button"
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400"
-                    onClick={() => setShow(!show)}
+                    onClick={() => setShowPassword(!showPassword)}
                   >
-                    {show ? <EyeOff size={20}/> : <Eye size={20}/>}
+                    {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
                   </button>
                   <InputClearablePassword
                     value={watch('password')}
@@ -216,7 +212,10 @@ function LoginForm () {
               {/** esqueceu a senha **/}
               </div>
               <div className="text-zinc-300 font-semibold text-sm">
-                Esqueceu a senha? <Link to="/" className="text-sm text-blue-200">Clique aqui.</Link>
+                Esqueceu a senha?
+                <Link to="/redefinir-senha" className="text-sm text-blue-200">
+                  Clique aqui.
+                </Link>
               </div>
 
               {/** botoes **/}

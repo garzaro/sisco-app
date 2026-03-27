@@ -1,31 +1,68 @@
-/**
- * Unica responsabilidade ler/escrever/remover dados de autenticação
- * **/
 import {LocalStorageService} from "@/app/service/LocalStorageService.js";
 
 
+/**
+ * Unica responsabilidade ler/escrever/remover dados de autenticação
+ * **/
+
 const storageLocal = LocalStorageService();
 
-const TOKEN_KEY = 'token_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';
+/**
+ * TOKEN_KEY chave usada para salvar o JWT
+ * **/
+const TOKEN_KEY = import.meta.env.VITE_API_AUTH_TOKEN_KEY;
+const LOGGED_USER_KEY = '_usuario_logado'
 
-export const authService = {
+/**
+ * Serviço
+ * **/
+export const AuthService = () => {
+  
+  return {
+    isAuthenticated: () => {
+      const token = storageLocal.obterItem( TOKEN_KEY );
+      return !!token;
+    },
 
-  login( token ){
-    localStorage.setItem( TOKEN_KEY, token );
-  },
+    /**
+     * @param {string} token - salvar o token JWT no armazenamento local
+     * **/
+    login: ( token ) => {
+      storageLocal.salvarItem( TOKEN_KEY, token );
+    },
 
-  logout(){
-    localStorage.removeItem( TOKEN_KEY );
-  },
+    /**
+     * Remove o token e o usuário do armazenamento local
+     * **/
+    logout: () => {
+      storageLocal.removerItem( TOKEN_KEY );
+      storageLocal.removerItem( LOGGED_USER_KEY );
+    },
 
-  isAuthenticated()CONTINUAR COM A AUTH PARA CHAVE DO USUARIO LOGADO EM APPLICATION
-    return !!localStorage.getItem( TOKEN_KEY );
-  },
+    /**
+     * @returns {string|null} o token JWT
+     * **/
+    getToken: () => storageLocal.obterItem( TOKEN_KEY ),
 
-  getToken(){
-    return localStorage.getItem( TOKEN_KEY );
+    /**
+     * @returns {object|null} o usuario logado
+     * **/
+    getLoggedUser: () => storageLocal.obterItem( LOGGED_USER_KEY ),
+
+    /**
+     * @param {object} user - salva o usuario logado no localStorage
+     * **/
+    saveLoggedUser: ( user ) => storageLocal.salvarItem( LOGGED_USER_KEY, user ),
+
+    /**
+     * Remove apenas o usuário logado
+     * **/
+    removeAuthenticatedUser: () => {
+      storageLocal.removerItem( LOGGED_USER_KEY);
+    }
   }
 };
+
 
 
 

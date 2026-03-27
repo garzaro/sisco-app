@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from "./Logo.jsx";
 import MenuUsuario from "./MenuUsuario.jsx";
 import Header from "@/components/landig/Header.jsx";
-import LandingPage from "@/pages/home/LandingPage.jsx";
+import LandingPage from "@/pages/home/landingPage.jsx";
 
 export default function Cabecalho({ className }) {
   return (

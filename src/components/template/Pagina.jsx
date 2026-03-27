@@ -4,7 +4,7 @@ import Menu from "./Menu.jsx"
 import Rodape from "./Rodape.jsx"
 import {Outlet} from "react-router-dom";
 import Header from "@/components/landig/Header.jsx";
-import LandingPage from "@/pages/home/LandingPage.jsx";
+import LandingPage from "@/pages/home/landingPage.jsx";
 
 /**
  * Componente principal da pagina
