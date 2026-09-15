@@ -26,9 +26,18 @@ export function SchemaUsuario() {
         "Nome completo deve conter apenas letra"
       ),
 
-    cpf: z.string()
-      .nonempty("CPF é de preenchimento obrigatório")
-      .regex(/^\d{11}$/, "O CPF deve ter conter 11 caracteres"),
+    cpf: z.preprocess(
+      (value) => {
+        if (typeof value !== "string") {
+          return value;
+        }
+
+        return value.replace(/\D/g, "");
+      },
+      z.string()
+        .nonempty("CPF é de preenchimento obrigatório")
+        .regex(/^\d{11}$/, "O CPF deve conter 11 caracteres")
+      ), 
 
     username: z.string()
       .nonempty("Nome de usuário é de preenchimento obrigatório")

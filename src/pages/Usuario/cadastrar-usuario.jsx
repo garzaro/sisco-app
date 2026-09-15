@@ -142,7 +142,7 @@ function UsuarioCreate() {
     setLoading(true);
     const usuarioPayload = {
       nomeCompleto: data.nomeCompleto,
-      cpf: data.cpf.replace(/\D/g, ''),
+      cpf: data.cpf,
       username: data.username,
       email: data.email,
       password: data.password,
