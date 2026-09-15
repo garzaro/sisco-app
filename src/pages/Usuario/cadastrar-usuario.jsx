@@ -140,12 +140,18 @@ function UsuarioCreate() {
 
   const usuarioSave = async (data) => {
     setLoading(true);
-    const usuario = { ...data, };
-    await serviceUsuario.salvar(usuario)
-      .then(res => {
+    const usuarioPayload = {
+      nomeCompleto: data.nomeCompleto,
+      cpf: data.cpf.replace(/\D/g, ''),
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    };
+    await serviceUsuario.salvar(usuarioPayload)
+      .then(response => {
         reset();
-        console.log("Usuario salvo", res);
-        messages.successMessage("Usuário salvo com sucesso");
+        console.log("Usuario salvo", response);
+        messages.successMessage("Usuário salvo com sucesso. Faça login!");
         setTimeout(() => navigate('/login-form'), 5000)
       })
       .catch (err => {

@@ -20,35 +20,42 @@ import {useAuth} from "@/auth/useAuth.jsx";
  * O objetivo é tornar o acesso o mais fluido possível para o usuário legítimo e o mais difícil possível para atacantes.
  * Lista dividida entre o que é essencial e o que agrega valor à experiência:
  *
- *[x] Campos Claros: Utilizar <label> vinculados aos inputs para acessibilidade e placeholder para contexto visual.
- *[x] Input de Senha Protegido: Usar o atributo type="password".
- *[x] Feedback de Erro Genérico: Nunca dizer "E-mail inválido" ou "Senha incorreta". Use: "E-mail ou senha incorretos". Isso evita a enumeração de usuários por atacantes.
- *[x] Botão de Ação Destacado: O botão "Entrar" deve ser o elemento visualmente mais forte da tela.
- *[] Estado de Carregamento (Loading): Desabilitar o botão e mostrar um spinner após o clique para evitar múltiplos envios (Double Submit).
- *[] Localstorage
- *[] Delay de 2,5s com feedback visual de "Redirecionando..."
+ * [x] Campos Claros: Utilizar <label> vinculados aos inputs para acessibilidade e placeholder para contexto visual.
+ * [x] Input de Senha Protegido: Usar o atributo type="password".
+ * [x] Feedback de Erro Genérico: Nunca dizer "E-mail inválido" ou "Senha incorreta". Use: "E-mail ou senha incorretos". Isso evita a enumeração de usuários por atacantes.
+ * [x] Botão de Ação Destacado: O botão "Entrar" deve ser o elemento visualmente mais forte da tela.
+ * [] Estado de Carregamento (Loading): Desabilitar o botão e mostrar um spinner após o clique para evitar múltiplos envios (Double Submit).
+ * [] Localstorage
+ * [] Delay de 2,5s com feedback visual de "Redirecionando..."
  *
  * 2. Segurança no Frontend
- *[] Uso de HTTPS: Garantir que a aplicação rode apenas sob protocolo seguro para criptografar os dados em trânsito.
- *[x] Validação de Formato: Validar se o e-mail tem um formato válido antes de enviar para o servidor (reduz requisições inúteis).
- *[] Sanitização Básica: Impedir espaços em branco desnecessários no início ou fim do e-mail.
+ * [] Uso de HTTPS: Garantir que a aplicação rode apenas sob protocolo seguro para criptografar os dados em trânsito.
+ * [x] Validação de Formato: Validar se o e-mail tem um formato válido antes de enviar para o servidor (reduz requisições inúteis).
+ * [] Sanitização Básica: Impedir espaços em branco desnecessários no início ou fim do e-mail.
  * **/
 
 /**
  * ✨ Ações Opcionais (Boas Práticas de Diferenciação)
  *
  * 1. Funcionalidades de Conveniência
- *[x] Exibir/Ocultar Senha: Adicionar um ícone de "olho" para que o usuário verifique o que digitou, reduzindo erros de digitação.
- *[] Esqueci minha senha: Link direto e visível para o fluxo de recuperação.
- *[] Lembrar de mim (Remember Me): Implementar via cookies seguros (HttpOnly e Secure) para manter a sessão ativa conforme a política de segurança.
- *[] Login Social (OAuth2): Botões para "Entrar com Google/Github" agilizam o processo e aumentam a conversão.
- *[] Seria útil implementar um reset() ou um Maps(-1) para voltar à página anterior - botao Voltar ou Cancelar.
+ * [x] Exibir/Ocultar Senha: Adicionar um ícone de "olho" para que o usuário verifique o que digitou, reduzindo erros de digitação.
+ * [] Esqueci minha senha: Link direto e visível para o fluxo de recuperação.
+ * [] Lembrar de mim (Remember Me): Implementar via cookies seguros (HttpOnly e Secure) para manter a sessão ativa conforme a política de segurança.
+ * [] Login Social (OAuth2): Botões para "Entrar com Google/Github" agilizam o processo e aumentam a conversão.
+ * [] Seria útil implementar um reset() ou um Maps(-1) para voltar à página anterior - botao Voltar ou Cancelar.
  *
  * 2. Segurança Avançada e Prevenção
- *[] CAPTCHA Invisível: Implementar (como o reCAPTCHA v3) para bloquear bots sem atrapalhar o usuário humano.
- *[] MFA (Autenticação de Dois Fatores): Se a senha estiver correta, redirecionar para uma segunda tela de código (OTP).
- *[] Limite de Tentativas Visual: Após X erros, exibir uma mensagem informando que a conta será bloqueada temporariamente.
+ * [] CAPTCHA Invisível: Implementar (como o reCAPTCHA v3) para bloquear bots sem atrapalhar o usuário humano.
+ * [] MFA (Autenticação de Dois Fatores): Se a senha estiver correta, redirecionar para uma segunda tela de código (OTP).
+ * [] Limite de Tentativas Visual: Após X erros, exibir uma mensagem informando que a conta será bloqueada temporariamente.
  *
+ * [] Limite de 5 falhas de autenticação.
+ * [] Bloqueio local por 15 minutos após a quinta falha.
+ * [] Contador associado ao email normalizado.
+ * [] Limpeza do contador após login bem-sucedido.
+ * [] Propagação dos erros originais da API.
+ * [] Erros de rede não incrementam tentativas.
+ * 
  * **/
 
 const schema = SchemaLogin();
@@ -125,7 +132,7 @@ function LoginForm () {
             </Tooltip>
           </span>
           <Link
-            to="/cadastrar-usuario"
+            to="/join/sign-up"
             className="text-sm min-h-screen font-semibold hover:text-emerald-700 transition-all"
           >
             <span className="underline"> Cadastre-se </span>

@@ -43,7 +43,7 @@ const AppRoutes = () => {
         }
       />
       <Route path="/login-form" element={ <LoginForm /> } />
-      <Route path="/cadastrar-usuario" element={ <UsuarioCreate /> } />
+      <Route path="/join/sign-up" element={ <UsuarioCreate /> } />
       <Route path="/redefinir-senha" element={ <RedefinirSenha /> } />
 
       {/** ROTAS PROTEGIDAS **/}

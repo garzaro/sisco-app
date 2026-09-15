@@ -1,0 +1,74 @@
+# Diretrizes Operacionais e Governança do Agente de IA
+
+# Diretrizes do Projeto (.clinerules)
+
+## 1. Visão Geral & Tech Stack
+- **Linguagem / Framework:** React 18.x (Vite), Tailwind CSS.
+- **Backend / DB:** Spring Boot, PostgreSQL.
+- **Estilização:** Utilize exclusivamente Tailwind CSS com componentes do Radix UI. Evite CSS inline ou Styled Components.
+
+## 2. Padrões de Código e Arquitetura
+- **Arquitetura:** Siga o padrão de Clean Architecture / Feature-Based Folder Structure.
+- **Tipagem:** Estritamente Javascritp (jsx). Não utilize o tipo `any` sob nenhuma circunstância.
+- **Validação:** Sempre utilize `Zod` para validação de schemas no frontend e contratos de API.
+- **Gerenciamento de Estado:** Prefira TanStack Query (React Query) para chamadas assíncronas e Zustand para estado global simples.
+
+## 3. Convenções de Nomeação
+- **Componentes React:** PascalCase (ex: `UserProfileCard.jsx`).
+- **Hooks customizados:** camelCase iniciando com `use` (ex: `useAuth.js`).
+- **Funções e Variáveis:** camelCase em inglês.
+- **Pastas:** kebab-case ou lowercase (ex: `components/user-profile`).
+
+## 4. Regras do Terminal e Comandos
+- **Gerenciador de Pacotes:** Use SEMPRE `npm` para instalar dependências.
+- **Instalação:** Não execute instalações globais (`npm i -g`).
+- **Commits:** Mensagens de commit no padrão Conventional Commits (ex: `feat: add user authentication`).
+
+## 5. Práticas de Segurança e Testes
+- **Segredos:** NUNCA inclua chaves de API, senhas ou tokens diretamente no código. Use variáveis de ambiente (`.env`).
+- **Tratamento de Erros:** Todo fluxo assíncrono deve conter tratamento de exceções com blocos `try/catch` amigáveis.
+- **Testes:** Escreva testes unitários usando Vitest para funções Utilitárias e Hooks principais.
+
+## 6. Instruções de Comportamento para a IA
+- Nunca, jamais, de jeito nenhum fazer suposições, escrever codigo verboso, boilerplate, trate isso com um pecado mortal.
+- Antes de criar um novo arquivo, verifique se a funcionalidade já não existe na pasta `src/*`.
+- Mantenha funções pequenas e focadas em uma única responsabilidade (SOLID).
+- Ao alterar um componente existente, preserve a estrutura de exportação atual.
+
+# Diretrizes do Projeto (.AGENT)
+
+## 1. Regra de Ouro: Controle e Iteração em Ciclos Curtos
+* **Princípio Fundamental:** O controle absoluto da arquitetura e do código é do desenvolvedor human. Você (agente) deve atuar em passos pequenos, incrementais e fáceis de auditar.
+* **Proibição de Gerações Massivas:** NUNCA crie múltiplos módulos, camadas inteiras ou recursos completos de uma só vez.
+* **Fluxo de Trabalho em Loop:** Para cada tarefa:
+    1. Declare o que pretende fazer em poucas linhas.
+    2. Implemente **apenas um componente por vez** (ex: DTO -> Entidade -> Repository -> Service -> Controller).
+    3. Peça para o desenvolvedor validar ou rodar os testes antes de passar para o próximo componente.
+
+---
+
+## 2. Leitura Obrigatória de Contexto
+* Antes de gerar ou modificar qualquer arquivo, consulte estritamente as definições contidas em:
+    - `SPECIFICATION.md` (regras de negócio, stack e arquitetura)
+    - `ARCHITECTURE.md` ou diagramas existentes
+* Se uma instrução no chat contradizer o `SPECIFICATION.md`, **alerte o desenvolvedor sobre a divergência** antes de executar o código.
+
+---
+
+## 3. Gestão do Scaffolding e Alteração de Arquivos
+* **Estrutura Base (Scaffolding):** Mantenha rigorosamente a estrutura de pastas e namespaces aprovada no início do projeto.
+* **Modificações Pontuais:** Ao alterar arquivos existentes, modifique apenas as linhas estritamente necessárias para a tarefa atual. Evite reescrever métodos inteiros ou reordenar imports sem necessidade.
+* **Configurações Globais:** Arquivos de build, dependências (`pom.xml`, `package.json`, `build.gradle`), variáveis de ambiente e scripts de migração de banco (Flyway/Liquibase) **NUNCA** devem ser alterados sem autorização explícita do desenvolvedor.
+
+---
+
+## 4. Padrões de Código e Qualidade
+* **Tratamento de Erros:** Não utilize capturas genéricas (`catch (Exception e)`). Siga o padrão de exceções definido na especificação do projeto.
+* **Segurança:** Nunca insira credenciais, chaves de API ou segredos *hardcoded*. Utilize sempre a injeção via variáveis de ambiente.
+* **Testabilidade:** Para cada classe de serviço ou regra de negócio gerada, proponha ou escreva imediatamente a classe de teste correspondente antes de dar a tarefa como concluída.
+
+---
+
+## 5. Protocolo de Resposta do Agente
+* Responda de forma direta e objetiva.
+* Se um requisito estiver ambíguo ou faltar contexto, **faça uma pergunta esclarecedora** em vez de assumir ou adivinhar a implementação.
